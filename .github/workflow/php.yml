@@ -1,0 +1,27 @@
+name: PHP Site
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'  # Choose your PHP version
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Run PHP site
+        run: php -S localhost:8000  # Start PHP development server
+
+      - name: Verify site
+        run: curl http://localhost:8000  # Verify site is running
